@@ -19,7 +19,7 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
 
     List<Product> findProductByTitleLike(String title, Limit limit);
 
-    Optional<Product> findById(Long id);
+    Optional<Product> findById(Long id);// this is an in built method no need to declare in the repository
 
 
 
