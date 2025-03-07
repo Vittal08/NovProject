@@ -1,7 +1,9 @@
 package com.ecommerce.novprojectecommerce.Services;
 import com.ecommerce.novprojectecommerce.Dtos.FakeStoreDto;
+import com.ecommerce.novprojectecommerce.Exceptions.ProductNotFoundExeption;
 import com.ecommerce.novprojectecommerce.Model.Category;
 import com.ecommerce.novprojectecommerce.Model.Product;
+import com.ecommerce.novprojectecommerce.Projections.ProductSummary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -62,6 +64,11 @@ public class FakeStoreProductService implements ProductService {
     @Override
     public void deleteProduct(Long id) {
 
+    }
+
+    @Override
+    public ProductSummary getProductSummary(Long id) throws ProductNotFoundExeption {
+        return null;
     }
 
 //    Convert FakeStoreProductDto into Product

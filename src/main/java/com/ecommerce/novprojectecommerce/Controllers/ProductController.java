@@ -3,8 +3,10 @@ package com.ecommerce.novprojectecommerce.Controllers;
 import com.ecommerce.novprojectecommerce.Dtos.FakeStoreDto;
 import com.ecommerce.novprojectecommerce.Exceptions.ProductNotFoundExeption;
 import com.ecommerce.novprojectecommerce.Model.Product;
+import com.ecommerce.novprojectecommerce.Projections.ProductSummary;
 import com.ecommerce.novprojectecommerce.Services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +17,12 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-
-        //TODO how to add the @Qualifier in the configuration file
-
-    //TODO how to add the @Qualifier in the configuration file
-
     ProductService ps;
-    public ProductController(@Qualifier("dbProductService") ProductService ps) {
+    public ProductController( @Qualifier("dbProductService") ProductService ps) {
         this.ps = ps;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable ("id")long id) throws ProductNotFoundExeption,RuntimeException {
-        ResponseEntity<Product> responseEntity = new ResponseEntity<>(
-                ps.getProductById(id), HttpStatus.OK
-        );
-        return responseEntity;
-    }
+
 
     @GetMapping("/All")
     public ResponseEntity<List<Product>> getAllProducts(){
@@ -53,7 +44,22 @@ public class ProductController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product,@PathVariable("id") Long id) throws ProductNotFoundExeption {
-        ResponseEntity<Product> productt =  new ResponseEntity<>(ps.updateProduct( id ,product ),HttpStatus.OK);
-        return productt;
+        ResponseEntity<Product> responseEntity =  new ResponseEntity<>(ps.updateProduct( id ,product ),HttpStatus.OK);
+        return responseEntity;
     }
+
+    @GetMapping("/summary/{id}")
+    public ResponseEntity<ProductSummary> getDetailsOfProductById(@PathVariable("id") Long id) throws  ProductNotFoundExeption{
+        ResponseEntity<ProductSummary> response = new ResponseEntity<>(ps.getProductSummary(id),HttpStatus.OK);
+        return response;
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable ("id")long id) throws ProductNotFoundExeption,RuntimeException {
+        ResponseEntity<Product> responseEntity = new ResponseEntity<>(
+                ps.getProductById(id), HttpStatus.OK
+        );
+        return responseEntity;
+    }
+
+
 }

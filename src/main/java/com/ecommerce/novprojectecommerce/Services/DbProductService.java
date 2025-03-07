@@ -3,6 +3,7 @@ package com.ecommerce.novprojectecommerce.Services;
 import com.ecommerce.novprojectecommerce.Dtos.FakeStoreDto;
 import com.ecommerce.novprojectecommerce.Exceptions.ProductNotFoundExeption;
 import com.ecommerce.novprojectecommerce.Model.Product;
+import com.ecommerce.novprojectecommerce.Projections.ProductSummary;
 import com.ecommerce.novprojectecommerce.Repository.ProductRepository;
 
 import org.springframework.stereotype.Service;
@@ -65,5 +66,16 @@ public class DbProductService implements ProductService{
             throw new ProductNotFoundExeption("Product with id "+ id + " is not found ");
         }
         pr.deleteById(id);
+    }
+
+    @Override
+    public ProductSummary getProductSummary(Long id) throws ProductNotFoundExeption {
+        Optional<Product> optionalProduct = pr.findById(id);
+        if(optionalProduct.isEmpty()){
+            throw new ProductNotFoundExeption("Product with id "+ id + " is not found ");
+        }
+        Product product = optionalProduct.get();
+        ProductSummary ps = pr.getProductDetails(product.getId());
+        return ps;
     }
 }

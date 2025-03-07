@@ -1,8 +1,10 @@
 package com.ecommerce.novprojectecommerce.Repository;
 
 import com.ecommerce.novprojectecommerce.Model.Product;
+import com.ecommerce.novprojectecommerce.Projections.ProductSummary;
 import org.springframework.data.domain.Limit;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
 
     Optional<Product> findById(Long id);// this is an in built method no need to declare in the repository
 
+    @Query("select p.title as title,p.price as price  from Product p where p.id = :productId")
+    ProductSummary getProductDetails(Long productId);
 
 
 }
