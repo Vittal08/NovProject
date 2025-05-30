@@ -16,12 +16,11 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ArrayIndexOutOfBoundsException.class)
-
     public ResponseEntity<String> handleIndexOutOfBoundException(){
         ResponseEntity<String> response = new ResponseEntity<>("Index Out of Bound Error",HttpStatus.BAD_REQUEST);
         return response;
     }
-
+  
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handlesRuntimeException(RuntimeException runtimeException){
         ResponseEntity<String> response = new ResponseEntity<>("Runtime Exception ",

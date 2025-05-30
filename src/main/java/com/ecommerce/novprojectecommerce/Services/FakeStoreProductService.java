@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.List;
-
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
     RestTemplate rt ;
@@ -71,7 +69,12 @@ public class FakeStoreProductService implements ProductService {
         return null;
     }
 
-//    Convert FakeStoreProductDto into Product
+    @Override
+    public String getProductDesc(Long id) throws ProductNotFoundExeption {
+        return "";
+    }
+
+//        Convert FakeStoreProductDto into Product
 
     public  Product ConvertFsdtoToProduct(FakeStoreDto dto){
         Product product = new Product();

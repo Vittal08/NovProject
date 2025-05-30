@@ -22,15 +22,13 @@ public class ProductController {
         this.ps = ps;
     }
 
-
-
     @GetMapping("/All")
     public ResponseEntity<List<Product>> getAllProducts(){
         ResponseEntity<List<Product>> responseEntity = new ResponseEntity<>(
                 ps.getAllProducts(), HttpStatus.OK
         );
         return responseEntity;
-    }
+}
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable("id")Long id) throws ProductNotFoundExeption {
         ps.deleteProduct(id);
@@ -47,7 +45,6 @@ public class ProductController {
         ResponseEntity<Product> responseEntity =  new ResponseEntity<>(ps.updateProduct( id ,product ),HttpStatus.OK);
         return responseEntity;
     }
-
     @GetMapping("/summary/{id}")
     public ResponseEntity<ProductSummary> getDetailsOfProductById(@PathVariable("id") Long id) throws  ProductNotFoundExeption{
         ResponseEntity<ProductSummary> response = new ResponseEntity<>(ps.getProductSummary(id),HttpStatus.OK);
@@ -60,6 +57,5 @@ public class ProductController {
         );
         return responseEntity;
     }
-
-
+    //TODO NEED TO LEARN ABOUT CASCADE IN CARDINALITIES
 }

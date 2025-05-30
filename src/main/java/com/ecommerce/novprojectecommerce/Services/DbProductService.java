@@ -1,6 +1,5 @@
 package com.ecommerce.novprojectecommerce.Services;
 
-import com.ecommerce.novprojectecommerce.Dtos.FakeStoreDto;
 import com.ecommerce.novprojectecommerce.Exceptions.ProductNotFoundExeption;
 import com.ecommerce.novprojectecommerce.Model.Product;
 import com.ecommerce.novprojectecommerce.Projections.ProductSummary;
@@ -42,7 +41,7 @@ public class DbProductService implements ProductService{
 
     @Override
     public Product updateProduct(Long id, Product product) throws ProductNotFoundExeption {
-        Optional<Product> optionalProduct = pr.findById(id);
+         Optional<Product> optionalProduct = pr.findById(id);
         if(optionalProduct.isEmpty()){
             throw new ProductNotFoundExeption("Product with id "+ id + " is not found ");
         }
@@ -63,7 +62,8 @@ public class DbProductService implements ProductService{
     public void deleteProduct(Long id) throws ProductNotFoundExeption {
         Optional<Product> optionalProduct = pr.findById(id);
         if(optionalProduct.isEmpty()){
-            throw new ProductNotFoundExeption("Product with id "+ id + " is not found ");
+            throw new ProductNotFoundExeption("Product with id " +
+                    + id + " is not found ");
         }
         pr.deleteById(id);
     }
@@ -78,4 +78,15 @@ public class DbProductService implements ProductService{
         ProductSummary ps = pr.getProductDetails(product.getId());
         return ps;
     }
+
+    @Override
+    public String getProductDesc(Long id) throws ProductNotFoundExeption {
+        return null;
+    }
+
+//    @Override
+//    public List<Product>findSimilarProducts(String title) {
+//
+//    }
+
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 
-@Entity(name = "jt_Users")
+@Entity(name = "jt_Users")// used to set the table name
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     @Id

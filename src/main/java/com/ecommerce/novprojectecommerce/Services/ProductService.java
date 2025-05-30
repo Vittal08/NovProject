@@ -14,4 +14,6 @@ public interface ProductService {
     Product updateProduct(Long id ,Product product ) throws ProductNotFoundExeption;
     void deleteProduct(Long id ) throws ProductNotFoundExeption;
     ProductSummary getProductSummary(Long id) throws ProductNotFoundExeption;
+//    List<Product> findSimilarProducts(String title);
+    String getProductDesc(Long id ) throws ProductNotFoundExeption;
 }
